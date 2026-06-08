@@ -1,0 +1,57 @@
+# Fichiers compilés
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.bin
+
+# Exécutable du projet
+hangman
+pendu
+main
+
+# Fichiers de debug
+*.dSYM/
+*.pdb
+*.ilk
+
+# Fichiers générés par compilation
+*.a
+*.so
+*.dll
+*.lib
+
+# Dossiers de build
+build/
+bin/
+obj/
+debug/
+release/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.swo
+
+# Fichiers éditeurs / IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# CMake si tu l’utilises
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# Valgrind
+vgcore.*
