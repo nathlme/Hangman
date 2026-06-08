@@ -158,11 +158,11 @@ int main() {
             break;
         case 3:
             system("cls");
-            printf("envoie un message quand t'es rentrer !");
+            printf(" à bientôt !");
             break;
         default:
             system("cls");
-            printf("écrit mieux");
+            printf(" input invalide ");
             break;
         } 
     } while (choice != 3);
