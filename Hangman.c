@@ -15,14 +15,120 @@ typedef struct{
 } Game;
 
 
+
+void printHangman(Game game) {
+    switch (game.count) {
+        case 9 :
+            printf("\n______________");
+            break;
+        case 8 :
+            for (int i = 0; i < 6; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 7 :
+            printf("   __________\n");
+            for (int i = 0; i < 6; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 6 :
+            printf("   __________\n");
+            printf("      |     |\n");
+            for (int i = 0; i < 5; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 5 :
+            printf("   __________\n");
+            printf("      |     |\n");
+            printf("      |     O\n");
+            for (int i = 0; i < 4; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 4 :
+            printf("   __________\n");
+            printf("      |     |\n");
+            printf("      |     O\n");
+            printf("      |     |\n");
+            for (int i = 0; i < 3; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 3 :
+            printf("   __________\n");
+            printf("      |     |\n");
+            printf("      |     O\n");
+            printf("      |    /|\n");
+            for (int i = 0; i < 3; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 2 :
+            printf("   __________\n");
+            printf("      |     |\n");
+            printf("      |     O\n");
+            printf("      |    /|\\\n");
+            for (int i = 0; i < 3; i++) {
+                printf("      |\n");
+            }
+            printf("______________");
+            break;
+        case 1 :
+            printf("   __________\n");
+            printf("      |     |\n");
+            printf("      |     O\n");
+            printf("      |    /|\\\n");
+            printf("      |    /\n");
+            printf("      |\n");
+            printf("      |\n");
+            printf("______________");
+            break;
+        case 0:
+            printf("   __________\n");
+            printf("      |     |\n");
+            printf("      |     O\n");
+            printf("      |    /|\\\n");
+            printf("      |    / \\\n");
+            printf("      |\n");
+            printf("      |\n");
+            printf("______________");
+            break;
+    }
+}
+
+
+int isValidWord(char *word) {
+    for (int i = 0; i < strlen(word); i++) {
+        if (!isalpha(word[i])) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 void chooseWord(char *word){
-    printf("\n\n==== Choisissez le mot a deviner ====\n"); 
-    scanf("%s",word);
+    do {
+        printf("\n\n==== Choisissez le mot a deviner ====\n");
+        scanf("%s", word);
+
+        if (!isValidWord(word)) {
+            printf("Erreur : le mot doit contenir uniquement des lettres.\n");
+        }
+
+    } while (!isValidWord(word));
 
     for (int i = 0; i < strlen(word); i++) {
         word[i] = tolower(word[i]);
     }
-
     printf("\nMot choisi !\n");
 }
 
@@ -74,9 +180,12 @@ void launchGame(Game game) {
 
     while (game.count > 0 && strcmp(game.hiddenWord, game.word) != 0) {
 
-        printf("\nMot actuel : %s\n", game.hiddenWord);
+        printHangman(game);
+
+        printf("\n\nMot actuel : %s\n", game.hiddenWord);
         printf("Essais restants : %d\n", game.count);
         printf("Lettre deja propose : ");
+        
 
         for (int i = 0; i < game.tries; i++) {
             printf("%c", game.alreadyGuessed[i]);
@@ -86,9 +195,15 @@ void launchGame(Game game) {
             }
         }
 
-        printf("\n\n\n==== Proposez une lettre ====\n");
-        scanf(" %c", &letter);
-        letter = tolower(letter);
+        do {
+            printf("\n\n\n==== Proposez une lettre ====\n");
+            scanf(" %c", &letter);
+            letter = tolower(letter);
+            if (!isalpha(letter)) {
+                printf("\nErreur : Proposez uniquement des lettres.\n");
+            }
+        }while(!isalpha(letter));
+        
 
         if (isAlreadyGuessed(game.alreadyGuessed, game.tries, letter)) {
             system("cls");
@@ -109,7 +224,8 @@ void launchGame(Game game) {
     if (strcmp(game.hiddenWord, game.word) == 0) {
         printf("Bravo, vous avez gagne ! Le mot etait : %s\n", game.word);
     } else {
-        printf("Perdu ! Le mot etait : %s\n", game.word);
+        printHangman(game);
+        printf("\n\nPerdu ! Le mot etait : %s\n", game.word);
     }
 }
 
@@ -158,7 +274,7 @@ int main() {
             break;
         case 3:
             system("cls");
-            printf(" à bientôt !");
+            printf("a bientot !");
             break;
         default:
             system("cls");
