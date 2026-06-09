@@ -234,7 +234,7 @@ void printmenu () {
     printf("1. Choisir le mot\n");
     printf("2. Lancer une partie\n");
     printf("3. Quitter le jeu\n");
-    printf("Votre choix :\n");       
+    printf("\nVotre choix :\n");       
 }
 
 int main() {
@@ -249,8 +249,9 @@ int main() {
     game.playing = true;
 
     int choice;
+    bool inMenu = true; 
 
-    do {
+    while(inMenu) {
         printmenu();
         scanf("%d",&choice);
 
@@ -275,13 +276,14 @@ int main() {
         case 3:
             system("cls");
             printf("a bientot !");
+            inMenu = false;
             break;
         default:
             system("cls");
-            printf(" input invalide ");
+            printf("\n\n\ninput invalide ");
             break;
         } 
-    } while (choice != 3);
+    };
 
     return 0;
 }
