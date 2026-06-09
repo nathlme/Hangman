@@ -8,12 +8,10 @@
 typedef struct{
     char word[35];
     char hiddenWord[35];
-    char alreadyGuessed[26];
+    char alreadyGuessed[27];
     int  count;
     int  tries;
-    bool playing;
 } Game;
-
 
 
 void printHangman(Game game) {
@@ -115,6 +113,7 @@ int isValidWord(char *word) {
     return 1;
 }
 
+
 void chooseWord(char *word){
     do {
         printf("\n\n==== Choisissez le mot a deviner ====\n");
@@ -129,6 +128,7 @@ void chooseWord(char *word){
     for (int i = 0; i < strlen(word); i++) {
         word[i] = tolower(word[i]);
     }
+
     printf("\nMot choisi !\n");
 }
 
@@ -163,6 +163,7 @@ int revealLetter(char *word, char *hiddenWord, char guessedLetter) {
 
     return found;
 }
+
 
 int isAlreadyGuessed(char alreadyGuessed[], int tries, char letter) {
     for (int i = 0; i < tries; i++) {
@@ -246,7 +247,6 @@ int main() {
     game.alreadyGuessed[0] = '\0';
     game.count = 10;
     game.tries = 0;
-    game.playing = true;
 
     int choice;
     bool inMenu = true; 
