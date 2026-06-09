@@ -8,7 +8,7 @@
 typedef struct{
     char word[35];
     char hiddenWord[35];
-    char alreadyGuessed[27];
+    char *alreadyGuessed;
     int  count;
     int  tries;
 } Game;
@@ -117,7 +117,7 @@ int isValidWord(char *word) {
 void chooseWord(char *word){
     do {
         printf("\n\n==== Choisissez le mot a deviner ====\n");
-        scanf("%s", word);
+        scanf("%34s", word);
 
         if (!isValidWord(word)) {
             printf("Erreur : le mot doit contenir uniquement des lettres.\n");
@@ -242,6 +242,13 @@ int main() {
 
     Game game;
     
+    game.alreadyGuessed = malloc(27 * sizeof(char));
+
+    if (game.alreadyGuessed == NULL) {
+        printf("Erreur d'allocation memoire\n");
+        return 1;
+    }
+
     game.word[0] = '\0';
     game.hiddenWord[0] = '\0';
     game.alreadyGuessed[0] = '\0';
@@ -284,6 +291,8 @@ int main() {
             break;
         } 
     };
+
+    free(game.alreadyGuessed);
 
     return 0;
 }
