@@ -89,7 +89,7 @@ gcc pendu.c -o pendu
 
 ---
 
-## ▶️ Exécution
+## Exécution
 
 Sous Windows :
 
